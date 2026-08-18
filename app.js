@@ -27,93 +27,66 @@ document.addEventListener('DOMContentLoaded', () => {
     const rsvpError = document.getElementById('rsvp-error');
     const submitBtn = document.getElementById('submit-btn');
 
-    // --- 1. CONTROL DE NAVEGACIÓN PÁGINA POR PÁGINA ---
-    // Agregamos listeners a los botones correspondientes
-    
-    // Abrir Portada (Página 1 a 2)
-    const btnOpen = document.getElementById('btn-open');
-    if (btnOpen) {
-        btnOpen.addEventListener('click', () => {
-            document.getElementById('page-1').classList.add('flipped');
+    // --- 1. CONTROL DE NAVEGACIÓN CENTRALIZADO (BOTONES Y SWIPE) ---
+    let currentPage = 1;
+    const totalPages = 6;
+
+    function goNext() {
+        if (currentPage === 1) {
             playAudio();
             startPetalsEffect();
             setTimeout(() => {
-                audioToggle.style.display = 'flex';
+                if(audioToggle) audioToggle.style.display = 'flex';
             }, 800);
-        });
+        }
+        if (currentPage < totalPages) {
+            const page = document.getElementById(`page-${currentPage}`);
+            if (page) page.classList.add('flipped');
+            currentPage++;
+        }
     }
 
-    // Página 2 a 3
-    const btnP2Next = document.getElementById('btn-p2-next');
-    if (btnP2Next) {
-        btnP2Next.addEventListener('click', () => {
-            document.getElementById('page-2').classList.add('flipped');
-        });
+    function goPrev() {
+        if (currentPage > 1) {
+            currentPage--;
+            const page = document.getElementById(`page-${currentPage}`);
+            if (page) page.classList.remove('flipped');
+        }
     }
 
-    // Página 3 (Atrás / Siguiente)
-    const btnP3Prev = document.getElementById('btn-p3-prev');
-    if (btnP3Prev) {
-        btnP3Prev.addEventListener('click', () => {
-            document.getElementById('page-1').classList.remove('flipped');
-        });
-    }
-
-    const btnP3Next = document.getElementById('btn-p3-next');
-    if (btnP3Next) {
-        btnP3Next.addEventListener('click', () => {
-            document.getElementById('page-3').classList.add('flipped');
-        });
-    }
-
-    // Página 4 (Atrás / Siguiente)
-    const btnP4Prev = document.getElementById('btn-p4-prev');
-    const btnP4Next = document.getElementById('btn-page4-next');
+    // Botones Universales (Delegación de Eventos)
+    document.querySelectorAll('.btn-next').forEach(btn => btn.addEventListener('click', goNext));
+    document.querySelectorAll('.btn-prev').forEach(btn => btn.addEventListener('click', goPrev));
     
-    if (btnP4Prev) {
-        btnP4Prev.addEventListener('click', () => {
-            document.getElementById('page-2').classList.remove('flipped');
-        });
-    }
-    // Nota: El botón de retroceso en la pág 4 en el HTML tiene id="btn-page4-prev" o similar
-    const btnPage4PrevReal = document.getElementById('btn-page4-prev');
-    if (btnPage4PrevReal) {
-        btnPage4PrevReal.addEventListener('click', () => {
-            document.getElementById('page-2').classList.remove('flipped');
-        });
-    }
+    // Botón de Portada especial
+    const btnOpen = document.getElementById('btn-open');
+    if (btnOpen) btnOpen.addEventListener('click', goNext);
 
-    if (btnP4Next) {
-        btnP4Next.addEventListener('click', () => {
-            document.getElementById('page-4').classList.add('flipped');
-        });
-    }
+    // Lógica de Swipe (Deslizamiento Táctil Móvil)
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const bookContainer = document.querySelector('.book-wrapper');
+    if (bookContainer) {
+        bookContainer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
 
-    // Página 5 (Atrás / Siguiente)
-    const btnPage5Prev = document.getElementById('btn-page5-prev');
-    const btnPage5Next = document.getElementById('btn-page5-next');
-
-    if (btnPage5Prev) {
-        btnPage5Prev.addEventListener('click', () => {
-            document.getElementById('page-3').classList.remove('flipped');
-        });
+        bookContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
     }
 
-    if (btnPage5Next) {
-        btnPage5Next.addEventListener('click', () => {
-            document.getElementById('page-5').classList.add('flipped');
-        });
+    function handleSwipe() {
+        const threshold = 40; // Distancia mínima en píxeles
+        if (touchStartX - touchEndX > threshold) {
+            goNext(); // Swipe a la izquierda
+        }
+        if (touchEndX - touchStartX > threshold) {
+            goPrev(); // Swipe a la derecha
+        }
     }
-
-    // Página 6 (Atrás)
-    const btnPage6Prev = document.getElementById('btn-page6-prev');
-    if (btnPage6Prev) {
-        btnPage6Prev.addEventListener('click', () => {
-            document.getElementById('page-4').classList.remove('flipped');
-        });
-    }
-
-
     // --- 2. CONTROL DE AUDIO (REPRODUCTOR ELEGANTE) ---
     let isMuted = false;
 
