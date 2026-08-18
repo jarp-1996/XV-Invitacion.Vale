@@ -2,6 +2,16 @@
    LÓGICA INTERACTIVA DE PÁGINA POR PÁGINA - INVITACIÓN DE VALERIA
    ========================================================================== */
 
+// --- PANTALLA DE CARGA (LOADER) ---
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader-wrapper');
+    if (loader) {
+        setTimeout(() => {
+            loader.classList.add('fade-out');
+        }, 500); // Pequeño retraso para asegurar carga de tipografías pesadas
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- CONFIGURACIÓN DE GOOGLE SHEETS ---
