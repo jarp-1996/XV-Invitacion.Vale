@@ -1,0 +1,975 @@
+/* ==========================================================================
+   DISEÑO SISTEMA & TOKENS (La Bella y la Bestia - Quinceaños de Valeria)
+   ========================================================================== */
+
+/* Importación de fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
+
+:root {
+    /* Paleta de Colores Principal */
+    --color-primary: #0a1931;        /* Azul noche profundo */
+    --color-primary-dark: #000c20;   /* Azul obscuro casi negro */
+    --color-primary-light: #15305b;  /* Azul noche intermedio */
+    
+    --color-gold: #d4af37;           /* Dorado metálico clásico */
+    --color-gold-light: #f3e5ab;     /* Dorado suave / champagne */
+    --color-gold-dark: #aa8c2c;      /* Dorado obscuro */
+    
+    --color-rose: #c2185b;           /* Rosa encantada */
+    --color-rose-light: #ec407a;     /* Rosa vibrante */
+    --color-rose-dark: #880e4f;      /* Rosa obscuro */
+    
+    --color-pergamino: #fdfbf7;      /* Crema pergamino */
+    --color-pergamino-dark: #e8dfcc; /* Sombra pergamino */
+    --color-text-dark: #2c2518;      /* Texto sobre pergamino */
+    --color-text-light: #f3e5ab;     /* Texto sobre azul */
+    
+    /* Contenedores Glassmorphism (Efecto cristal) */
+    --color-glass-bg: rgba(10, 25, 49, 0.65);
+    --color-glass-border: rgba(212, 175, 55, 0.35);
+    --color-glass-shadow: rgba(0, 0, 0, 0.4);
+    
+    /* Fuentes */
+    --font-title: 'Great Vibes', cursive;
+    --font-serif: 'Cinzel', serif;
+    --font-serif-dec: 'Cinzel Decorative', serif;
+    --font-body: 'Cormorant Garamond', serif;
+    --font-sans: 'Montserrat', sans-serif;
+    
+    /* Sombras y Efectos */
+    --gold-glow: 0 0 15px rgba(212, 175, 55, 0.6);
+    --gold-glow-strong: 0 0 25px rgba(212, 175, 55, 0.9);
+    --rose-glow: 0 0 15px rgba(194, 24, 91, 0.6);
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Reset de Estilos Básicos */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base */
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   ANIMACIONES DE EFECTOS MÁGICOS
+   ========================================================================== */
+
+/* Caída de Pétalos */
+#petals-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+    mix-blend-mode: multiply;
+}
+
+.petal {
+    position: absolute;
+    top: -10%;
+    background-image: url('assets/petal_white.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    transform-origin: center center;
+    mix-blend-mode: multiply;
+}
+
+@keyframes fall {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg) scale(1);
+    }
+    100% {
+        top: 110%;
+        transform: translateX(100px) rotate(360deg) scale(0.6);
+    }
+}
+
+/* Brillo Dorado Pulsante */
+@keyframes goldPulse {
+    0% {
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        border-color: rgba(212, 175, 55, 0.4);
+    }
+    50% {
+        box-shadow: var(--gold-glow-strong);
+        border-color: rgba(212, 175, 55, 0.85);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        border-color: rgba(212, 175, 55, 0.4);
+    }
+}
+
+/* Destello en botones */
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+/* ==========================================================================
+   COMPONENTES GRÁFICOS (Sistema de Diseño)
+   ========================================================================== */
+
+/* 1. BOTONES */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.9rem 2.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+}
+
+/* Botón Dorado (Temático) */
+.btn-gold {
+    background: transparent;
+    color: var(--color-gold-light);
+    border: 1px solid var(--color-gold);
+    box-shadow: var(--gold-glow);
+}
+
+.btn-gold:hover {
+    background-color: var(--color-gold);
+    color: var(--color-primary-dark);
+    box-shadow: var(--gold-glow-strong);
+    transform: translateY(-2px);
+}
+
+/* Botón Rosa (Confirmación) */
+.btn-rose {
+    background: linear-gradient(135deg, var(--color-rose) 0%, var(--color-rose-dark) 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--rose-glow);
+}
+
+.btn-rose:hover {
+    background: linear-gradient(135deg, var(--color-rose-light) 0%, var(--color-rose) 100%);
+    box-shadow: 0 0 25px rgba(194, 24, 91, 0.9);
+    transform: translateY(-2px);
+}
+
+/* Añadir el efecto de brillo metálico a todos los botones */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: 0.75s;
+}
+
+.btn:hover::after {
+    animation: shine 1.5s infinite;
+}
+
+/* 2. CONTENEDORES GLASSMORPHIC (Para fondos oscuros) */
+.glass-container {
+    background: var(--color-glass-bg);
+    border: 1px solid var(--color-glass-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+}
+
+.glass-container:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+/* Ornamentación Dorada de Esquinas */
+.ornate-box {
+    position: relative;
+    border: 1px solid var(--color-gold);
+    padding: 2.5rem 1.5rem;
+}
+
+.ornate-box::before, .ornate-box::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border: 2px solid var(--color-gold);
+    transition: var(--transition-smooth);
+}
+
+/* Esquinas de Caja */
+.ornate-box::before {
+    top: -5px;
+    left: -5px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.ornate-box::after {
+    bottom: -5px;
+    right: -5px;
+    border-left: none;
+    border-top: none;
+}
+
+/* 3. TIPOGRAFÍAS */
+.text-cursive {
+    font-family: var(--font-title);
+    color: var(--color-gold-light);
+    font-weight: normal;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Alto contraste en tarjetas de pergamino claro */
+.pergamino-card .text-cursive {
+    color: var(--color-rose-dark); /* Color vino elegante */
+    text-shadow: 1px 1px 0px var(--color-gold-light), 2px 2px 4px rgba(44, 37, 24, 0.15);
+}
+
+.text-serif-dec {
+    font-family: var(--font-serif-dec);
+    color: var(--color-gold);
+    letter-spacing: 0.05em;
+}
+
+.text-serif {
+    font-family: var(--font-serif);
+    letter-spacing: 0.1em;
+}
+
+/* 4. REPRODUCTOR DE AUDIO FLOTANTE */
+.audio-control {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1000;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-glass-bg);
+    border: 1px solid var(--color-gold);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+    color: var(--color-gold-light);
+}
+
+.audio-control:hover {
+    transform: scale(1.1);
+    border-color: var(--color-gold-light);
+    box-shadow: var(--gold-glow);
+}
+
+.audio-control svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* ==========================================================================
+   ESTILOS DE LA PÁGINA INVITACIÓN (INDEX)
+   ========================================================================== */
+
+/* Envoltura del libro 3D y centrado */
+.book-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 1.5rem;
+    position: relative;
+    background-color: var(--color-primary-dark);
+    background: radial-gradient(circle at center, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    overflow: hidden;
+}
+
+/* Contenedor del libro responsivo */
+.book-container {
+    width: 100%;
+    max-width: 320px;
+    height: 520px;
+    position: relative;
+    perspective: 1500px;
+}
+
+@media screen and (min-width: 400px) {
+    .book-container {
+        max-width: 340px;
+        height: 550px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .book-container {
+        max-width: 360px;
+        height: 580px;
+    }
+}
+
+.book {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    border-radius: 8px;
+}
+
+/* Estilo para las páginas individuales del libro */
+.page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease, z-index 0s linear 0.4s;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Stacking Order (Z-Index) de las páginas */
+#page-1 { z-index: 10; }
+#page-2 { z-index: 9; }
+#page-3 { z-index: 8; }
+#page-4 { z-index: 7; }
+#page-5 { z-index: 6; }
+#page-6 { z-index: 5; }
+
+/* Transición de giro (Flipping Y + Desvanecimiento en móvil para evitar overflow) */
+.page.flipped {
+    transform: rotateY(-140deg) translateX(-40px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1 !important;
+}
+
+/* Portada del libro (Página 1 Frontal) */
+.page-content-front {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 8px;
+    border: 2px solid rgba(212, 175, 55, 0.6);
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.page-content-front::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.3) 100%);
+    pointer-events: none;
+    border-radius: 6px;
+}
+
+/* Botón de apertura en portada */
+.cover-trigger-btn {
+    position: absolute;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    animation: goldPulse 2.5s infinite;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    padding: 0.8rem 1.8rem;
+}
+
+/* Páginas de Pergamino Internas */
+.page-content {
+    width: 100%;
+    height: 100%;
+    background: url('assets/parchment_bg2.jpg') no-repeat center center;
+    background-size: cover;
+    border-radius: 8px;
+    border: 1px solid var(--color-pergamino-dark);
+    padding: 2.5rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--color-text-dark);
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.15), 0 10px 25px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+/* Marco dorado sutil de la página */
+.page-content.ornate-box::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 1px solid rgba(170, 140, 44, 0.35);
+    pointer-events: none;
+    border-radius: 4px;
+}
+
+/* Texto del Prólogo */
+.text-story {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-text-dark);
+    text-shadow: 0.5px 0.5px 0.5px rgba(255,255,255,0.8);
+}
+
+/* Barra de Navegación del Libro */
+.page-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: auto; /* Empuja al fondo */
+    width: 100%;
+    z-index: 10;
+}
+
+.btn-nav {
+    background: transparent;
+    border: 1px solid var(--color-gold-dark);
+    color: var(--color-text-dark);
+    font-family: var(--font-serif);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.45rem 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-nav:hover {
+    background: var(--color-gold);
+    color: var(--color-primary-dark);
+    border-color: var(--color-gold);
+    box-shadow: 0 0 8px rgba(170, 140, 44, 0.4);
+}
+
+/* Cabecera / Sección Hero */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-logo-rose {
+    width: 140px;
+    height: auto;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 5px 15px rgba(194, 24, 91, 0.4));
+}
+
+.hero-section h1 {
+    font-size: 4rem;
+    margin: 0.5rem 0 1.5rem;
+    line-height: 0.9;
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    font-style: italic;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+/* Nombres de Padres y Padrinos */
+.parents-section h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-gold-dark);
+}
+
+.names-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.names-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.names-block p {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+/* Separadores Dorados */
+.gold-separator {
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(to right, rgba(212, 175, 55, 0) 0%, rgba(212, 175, 55, 0.7) 50%, rgba(212, 175, 55, 0) 100%);
+    margin: 2rem auto;
+}
+
+/* Cuenta Regresiva (Countdown) */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.countdown-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(170, 140, 44, 0.3);
+    min-width: 65px;
+    padding: 0.6rem 0.4rem;
+    border-radius: 6px;
+}
+
+.countdown-val {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    line-height: 1;
+}
+
+.countdown-lbl {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.3rem;
+    color: rgba(44, 37, 24, 0.75);
+}
+
+/* Detalles del Evento (Tarjetas Oscuras con Glassmorphism) */
+.details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.event-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.event-card h3 {
+    color: var(--color-gold);
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.event-card p {
+    font-size: 1.1rem;
+}
+
+.event-card .time {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-gold-light);
+}
+
+.event-card .address {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    max-width: 80%;
+    margin-bottom: 0.5rem;
+}
+
+/* Vestimenta y Regalos */
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.8rem;
+}
+
+.info-card h3 {
+    font-size: 1.5rem;
+    color: var(--color-gold);
+    margin-bottom: 0.3rem;
+}
+
+.info-card p {
+    font-size: 1.1rem;
+    max-width: 85%;
+}
+
+.info-card .dress-type {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-gold-light);
+}
+
+/* ==========================================================================
+   FORMULARIO RSVP Y GOOGLE SHEETS
+   ========================================================================== */
+
+.rsvp-card h2 {
+    font-size: 2.2rem;
+    color: var(--color-gold);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.rsvp-card p {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 1.8rem;
+    color: var(--color-gold-light);
+}
+
+.rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: left;
+}
+
+.form-group label {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-gold-light);
+}
+
+.form-input {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-glass-border);
+    color: #ffffff;
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--color-gold);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+}
+
+select.form-input option {
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
+
+/* Radio buttons estilizados */
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.3rem;
+}
+
+.radio-label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: #ffffff;
+}
+
+.radio-input {
+    display: none;
+}
+
+.radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--color-gold);
+    border-radius: 50%;
+    margin-right: 8px;
+    position: relative;
+    display: inline-block;
+    transition: var(--transition-smooth);
+}
+
+.radio-input:checked + .radio-custom::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-gold);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.radio-input:checked + .radio-custom {
+    box-shadow: var(--gold-glow);
+}
+
+/* Notificaciones del Formulario */
+.form-message {
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    display: none;
+    margin-top: 1rem;
+}
+
+.form-message.success {
+    display: block;
+    background: rgba(40, 167, 69, 0.15);
+    border: 1px solid #28a745;
+    color: #2da44e;
+}
+
+.form-message.error {
+    display: block;
+    background: rgba(220, 53, 69, 0.15);
+    border: 1px solid #dc3545;
+    color: #ea4a5a;
+}
+
+/* ==========================================================================
+   DISEÑO PARA LA PÁGINA DEL SISTEMA DE DISEÑO (DESIGN SYSTEM)
+   ========================================================================== */
+
+.ds-body {
+    background-color: #050d1a;
+    padding: 3rem 1.5rem;
+}
+
+.ds-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid var(--color-gold);
+    padding-bottom: 2rem;
+}
+
+.ds-header h1 {
+    font-size: 2.8rem;
+    color: var(--color-gold);
+    margin-bottom: 0.5rem;
+}
+
+.ds-section {
+    margin-bottom: 4rem;
+}
+
+.ds-section h2 {
+    font-size: 1.8rem;
+    color: var(--color-gold-light);
+    margin-bottom: 1.8rem;
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Cuadrículas del Catálogo */
+.ds-color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.ds-color-card {
+    background: #0d1e36;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.ds-color-sample {
+    height: 100px;
+    width: 100%;
+}
+
+.ds-color-info {
+    padding: 1rem;
+}
+
+.ds-color-info h4 {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+}
+
+.ds-color-info p {
+    font-family: monospace;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Tipografía en Catálogo */
+.ds-font-sample {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ds-font-row {
+    background: rgba(255,255,255,0.02);
+    border-left: 3px solid var(--color-gold);
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+}
+
+.ds-font-row p.lbl {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+}
+
+/* Componentes en Catálogo */
+.ds-comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.ds-comp-card {
+    background: #0d1e36;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.ds-comp-card.dark-bg {
+    background: var(--color-primary-dark);
+}
+
+.ds-comp-card.light-bg {
+    background: var(--color-pergamino);
+    color: var(--color-text-dark);
+}
+
+.ds-comp-card h4 {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    opacity: 0.5;
+    align-self: flex-start;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    width: 100%;
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   RESPONSIVIDAD (Media Queries)
+   ========================================================================== */
+
+/* Tablets / Computadoras (Landscape) */
+@media screen and (min-width: 768px) {
+    html {
+        font-size: 18px; /* Texto ligeramente más grande en escritorios */
+    }
+    
+    .book {
+        width: 380px;
+        height: 580px;
+    }
+    
+    .main-content {
+        padding: 4rem 2rem 8rem;
+        gap: 4.5rem;
+    }
+    
+    .pergamino-card {
+        padding: 4.5rem 3.5rem;
+    }
+    
+    .details-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    
+    .info-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* En pantallas grandes el audio control se ubica más cómodo */
+    .audio-control {
+        bottom: 30px;
+        right: 30px;
+    }
+}

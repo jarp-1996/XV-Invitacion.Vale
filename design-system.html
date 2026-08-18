@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Gráfico & Sistema de Diseño - Quinceaños de Valeria</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos adicionales solo para organizar la página del catálogo */
+        .ds-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .ds-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .ds-grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .code-preview {
+            background-color: #030a14;
+            color: #8da1b9;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            width: 100%;
+            overflow-x: auto;
+        }
+        .ds-img-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .ds-img-card {
+            background: #0d1e36;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .ds-img-preview {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--color-gold);
+        }
+        .ds-img-info h4 {
+            color: var(--color-gold-light);
+            font-family: var(--font-serif);
+            margin-bottom: 0.2rem;
+        }
+        .ds-img-info p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+        /* Estilos específicos para las hojas en miniatura del catálogo */
+        .ds-book-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 1.5rem;
+        }
+        .ds-page-frame {
+            background-color: var(--color-primary-dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+        .ds-page-frame h4 {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--color-gold-light);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            align-self: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+            padding-bottom: 0.3rem;
+        }
+        .ds-page-container {
+            width: 100%;
+            height: 480px;
+            position: relative;
+        }
+        .ds-page-container .page-content,
+        .ds-page-container .page-content-front {
+            position: static;
+            height: 100%;
+            pointer-events: none; /* Desactiva interacción en vistas previas */
+        }
+    </style>
+</head>
+<body class="ds-body">
+
+    <div class="ds-container">
+        
+        <header class="ds-header">
+            <h1 class="text-serif-dec">Sistema de Diseño</h1>
+            <p class="text-serif" style="color: var(--color-gold-light); font-size: 1.1rem; letter-spacing: 0.2em; text-transform: uppercase;">Valeria Rodríguez Paredes • Quinceañero</p>
+            <p style="opacity: 0.7; margin-top: 1rem; font-style: italic;">Esta es la guía gráfica del proyecto. Los cambios aplicados a styles.css se verán reflejados aquí automáticamente.</p>
+        </header>
+
+        <!-- SECCIÓN 1: PALETA DE COLORES -->
+        <section class="ds-section">
+            <h2 class="text-serif">1. Paleta de Colores</h2>
+            <div class="ds-color-grid">
+                
+                <div class="ds-color-card">
+                    <div class="ds-color-sample" style="background-color: var(--color-primary-dark);"></div>
+                    <div class="ds-color-info">
+                        <h4>Azul Noche Obscuro</h4>
+                        <p>--color-primary-dark</p>
+                        <p>#000c20</p>
+                    </div>
+                </div>
+
+                <div class="ds-color-card">
+                    <div class="ds-color-sample" style="background-color: var(--color-primary);"></div>
+                    <div class="ds-color-info">
+                        <h4>Azul Noche Medio</h4>
+                        <p>--color-primary</p>
+                        <p>#0a1931</p>
+                    </div>
+                </div>
+
+                <div class="ds-color-card">
+                    <div class="ds-color-sample" style="background-color: var(--color-gold);"></div>
+                    <div class="ds-color-info">
+                        <h4>Dorado Metálico</h4>
+                        <p>--color-gold</p>
+                        <p>#d4af37</p>
+                    </div>
+                </div>
+
+                <div class="ds-color-card">
+                    <div class="ds-color-sample" style="background-color: var(--color-gold-light);"></div>
+                    <div class="ds-color-info">
+                        <h4>Dorado Suave</h4>
+                        <p>--color-gold-light</p>
+                        <p>#f3e5ab</p>
+                    </div>
+                </div>
+
+                <div class="ds-color-card">
+                    <div class="ds-color-sample" style="background-color: var(--color-rose);"></div>
+                    <div class="ds-color-info">
+                        <h4>Rosa Encantada</h4>
+                        <p>--color-rose</p>
+                        <p>#c2185b</p>
+                    </div>
+                </div>
+
+                <div class="ds-color-card">
+                    <div class="ds-color-sample" style="background-color: var(--color-rose-light);"></div>
+                    <div class="ds-color-info">
+                        <h4>Rosa Vibrante</h4>
+                        <p>--color-rose-light</p>
+                        <p>#ec407a</p>
+                    </div>
+                </div>
+
+                <div class="ds-color-card">
+                    <div class="ds-color-sample" style="background-color: var(--color-pergamino);"></div>
+                    <div class="ds-color-info">
+                        <h4>Crema Pergamino</h4>
+                        <p>--color-pergamino</p>
+                        <p>#fdfbf7</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: TIPOGRAFÍA -->
+        <section class="ds-section">
+            <h2 class="text-serif">2. Tipografía & Tamaños</h2>
+            <div class="ds-font-sample">
+                
+                <div class="ds-font-row">
+                    <p class="lbl">Manuscrito de Cuento (Título / Nombres)</p>
+                    <h3 class="text-cursive" style="font-size: 3.5rem;">Valeria Rodríguez</h3>
+                    <p style="margin-top: 0.5rem; opacity: 0.7;">Fuente: <code>'Great Vibes', cursive</code> | Usada para el nombre principal y detalles románticos.</p>
+                </div>
+
+                <div class="ds-font-row">
+                    <p class="lbl">Serif Ornamental (Títulos de Secciones)</p>
+                    <h3 class="text-serif-dec" style="font-size: 2rem;">LA RECEPCIÓN</h3>
+                    <p style="margin-top: 0.5rem; opacity: 0.7;">Fuente: <code>'Cinzel Decorative', serif</code> | Usada con moderación en encabezados majestuosos.</p>
+                </div>
+
+                <div class="ds-font-row">
+                    <p class="lbl">Serif Clásico (Subtítulos e Información de Destino)</p>
+                    <h3 class="text-serif" style="font-size: 1.5rem; color: var(--color-gold-light);">SÁBADO 7 DE NOVIEMBRE</h3>
+                    <p style="margin-top: 0.5rem; opacity: 0.7;">Fuente: <code>'Cinzel', serif</code> | Usada en fechas, categorías y etiquetas importantes.</p>
+                </div>
+
+                <div class="ds-font-row">
+                    <p class="lbl">Cuerpo Clásico (Textos Descriptivos)</p>
+                    <p class="text-serif" style="font-family: var(--font-body); font-size: 1.25rem; font-style: italic; letter-spacing: 0.02em;">
+                        "Érase una vez, en un reino muy lejano, una joven que soñaba con una noche llena de magia y encanto. Acompáñanos a celebrar los quince años de Valeria..."
+                    </p>
+                    <p style="margin-top: 0.5rem; opacity: 0.7;">Fuente: <code>'Cormorant Garamond', serif</code> (Grosor normal o itálica) | Altamente legible y con aire tradicional francés.</p>
+                </div>
+
+                <div class="ds-font-row">
+                    <p class="lbl">Sans-Serif Moderno (Números, Formulario e Inputs)</p>
+                    <p style="font-family: var(--font-sans); font-size: 0.95rem; letter-spacing: 0.05em;">
+                        07 DÍAS : 14 HORAS : 30 MINUTOS
+                    </p>
+                    <p style="margin-top: 0.5rem; opacity: 0.7;">Fuente: <code>'Montserrat', sans-serif</code> | Usada en el contador de tiempo, formularios de asistencia e inputs táctiles.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: COMPONENTES Y BOTONES -->
+        <section class="ds-section">
+            <h2 class="text-serif">3. Componentes Gráficos</h2>
+            <div class="ds-comp-grid">
+                
+                <!-- Botón Dorado -->
+                <div class="ds-comp-card dark-bg">
+                    <h4>Botón Temático Dorado</h4>
+                    <button class="btn btn-gold">Ver Ubicación</button>
+                    <div class="code-preview">&lt;button class="btn btn-gold"&gt;Ver Ubicación&lt;/button&gt;</div>
+                </div>
+
+                <!-- Botón Rosa -->
+                <div class="ds-comp-card dark-bg">
+                    <h4>Botón RSVP Rosado</h4>
+                    <button class="btn btn-rose">Confirmar Asistencia</button>
+                    <div class="code-preview">&lt;button class="btn btn-rose"&gt;Confirmar Asistencia&lt;/button&gt;</div>
+                </div>
+
+                <!-- Botón Silencio -->
+                <div class="ds-comp-card dark-bg">
+                    <h4>Control de Audio (Mute)</h4>
+                    <div style="position: relative; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <div class="audio-control" style="position: static; margin: 0;">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15.5H11V16h2v1.5zm0-3H11V7h2v7.5z"/></svg>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Fijo en la esquina inferior derecha.</p>
+                </div>
+
+                <!-- Contenedor Glass -->
+                <div class="ds-comp-card dark-bg">
+                    <h4>Contenedor tipo Glass (Sobre fondo azul)</h4>
+                    <div class="glass-container" style="width: 100%; text-align: center; padding: 1.5rem;">
+                        <h3 class="text-serif-dec" style="color: var(--color-gold); font-size: 1.2rem; margin-bottom: 0.5rem;">Caja Cristal</h3>
+                        <p style="font-size: 0.95rem;">Contenido con efecto esmerilado translúcido.</p>
+                    </div>
+                    <div class="code-preview">&lt;div class="glass-container"&gt;...&lt;/div&gt;</div>
+                </div>
+
+                <!-- Caja Ornamental Pergamino -->
+                <div class="ds-comp-card light-bg">
+                    <h4>Caja Pergamino (Con marcos y esquineros)</h4>
+                    <div class="ornate-box" style="width: 100%; text-align: center;">
+                        <h3 class="text-cursive" style="font-size: 2.2rem; margin-bottom: 0.5rem;">Valeria</h3>
+                        <p style="font-size: 1rem; font-family: var(--font-body);">Marco decorativo dorado sobre pergamino crema.</p>
+                    </div>
+                    <div class="code-preview">&lt;div class="ornate-box"&gt;...&lt;/div&gt;</div>
+                </div>
+
+                <!-- Formulario Inputs Simplificado (Columnas B y C) -->
+                <div class="ds-comp-card dark-bg">
+                    <h4>Formulario RSVP (Solo Nombre y Asistencia)</h4>
+                    <div class="form-group" style="width: 100%;">
+                        <label for="sample-input">Nombre Completo</label>
+                        <input type="text" id="sample-input" class="form-input" placeholder="Ej. Familia Rodríguez" style="width: 100%;" readonly>
+                    </div>
+                    <div class="form-group" style="width: 100%; margin-top: 1rem;">
+                        <label>¿Asistirá a la fiesta?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="asiste-sample" class="radio-input" checked disabled>
+                                <span class="radio-custom"></span> Sí, asistiré
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="asiste-sample" class="radio-input" disabled>
+                                <span class="radio-custom"></span> No podré asistir
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: IMÁGENES Y ACTIVOS GRÁFICOS -->
+        <section class="ds-section">
+            <h2 class="text-serif">4. Activos Visuales (Imágenes)</h2>
+            <p style="opacity: 0.8; margin-bottom: 1rem;">Imágenes utilizadas en la invitación con temática clásica de Disney.</p>
+            <div class="ds-img-grid">
+                
+                <!-- Portada del Libro -->
+                <div class="ds-img-card">
+                    <img src="assets/book_cover2.jpg" alt="Portada del Libro" class="ds-img-preview">
+                    <div class="ds-img-info">
+                        <h4>Portada del Libro</h4>
+                        <p>Ruta: <code>assets/book_cover2.jpg</code></p>
+                        <p>Dimensiones óptimas para vista mobile-first.</p>
+                    </div>
+                </div>
+
+                <!-- Rosa Encantada -->
+                <div class="ds-img-card">
+                    <img src="assets/enchanted_rose.jpg" alt="Rosa Encantada" class="ds-img-preview">
+                    <div class="ds-img-info">
+                        <h4>Rosa Encantada</h4>
+                        <p>Ruta: <code>assets/enchanted_rose.jpg</code></p>
+                        <p>Elemento central decorativo para la invitación interna.</p>
+                    </div>
+                </div>
+
+                <!-- Fondo de Pergamino -->
+                <div class="ds-img-card">
+                    <img src="assets/parchment_bg2.jpg" alt="Fondo de Pergamino" class="ds-img-preview" style="object-position: center top;">
+                    <div class="ds-img-info">
+                        <h4>Fondo de Pergamino</h4>
+                        <p>Ruta: <code>assets/parchment_bg2.jpg</code></p>
+                        <p>Papel envejecido usado como textura de fondo.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: VISTAS PREVIAS DE LAS HOJAS DEL LIBRO -->
+        <section class="ds-section">
+            <h2 class="text-serif">5. Hojas del Libro (Vistas Individuales)</h2>
+            <p style="opacity: 0.8; margin-bottom: 1.5rem;">Visualización de los contenidos de cada página individual del libro en orden secuencial.</p>
+            
+            <div class="ds-book-preview-grid">
+                
+                <!-- HOJA 1: PORTADA -->
+                <div class="ds-page-frame">
+                    <h4>Página 1: Portada</h4>
+                    <div class="ds-page-container">
+                        <div class="page-content-front" style="background-image: url('assets/book_cover2.jpg');">
+                            <button class="btn btn-gold cover-trigger-btn" style="position: absolute; bottom: 30px;">Abrir Invitación</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HOJA 2: PRÓLOGO -->
+                <div class="ds-page-frame">
+                    <h4>Página 2: Prólogo</h4>
+                    <div class="ds-page-container">
+                        <div class="page-content parchment-bg ornate-box" style="padding: 1.5rem 1rem;">
+                            <p class="text-serif" style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-gold-dark);">Valeria</p>
+                            <div class="gold-separator" style="margin: 0.5rem auto;"></div>
+                            <p class="text-serif text-story" style="font-size: 0.95rem; font-style: italic; margin: 1rem 0; line-height: 1.4;">
+                                "Érase una vez, en un reino muy lejano, una joven que soñaba con una noche llena de magia y encanto..."
+                            </p>
+                            <div class="gold-separator" style="margin: 0.5rem auto;"></div>
+                            <p class="text-serif" style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-gold-dark);">Noviembre 7, 2026</p>
+                            <div class="page-nav" style="margin-top: auto;"><button class="btn-nav">Comenzar</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HOJA 3: BIENVENIDA Y PADRES -->
+                <div class="ds-page-frame">
+                    <h4>Página 3: Presentación</h4>
+                    <div class="ds-page-container">
+                        <div class="page-content parchment-bg ornate-box" style="padding: 1.5rem 1rem;">
+                            <img src="assets/enchanted_rose.jpg" alt="Rosa Encantada" style="width: 50px; height: 90px; object-fit: cover; border-radius: 4px; border: 1px solid var(--color-gold); margin-bottom: 0.4rem;">
+                            <p class="text-serif" style="font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-gold-dark);">Mis Quince Años</p>
+                            <h1 class="text-cursive" style="font-size: 2rem; margin: 0.1rem 0; line-height: 1;">Valeria</h1>
+                            <p class="text-serif" style="font-size: 0.75rem; font-style: italic; margin-bottom: 0.2rem;">Con la bendición de mis padres:</p>
+                            <div style="font-size: 0.8rem; font-weight: 600; line-height: 1.2; margin-bottom: 0.4rem;">
+                                <p>Marco Rodríguez T.</p>
+                                <p>Marinela Paredes T.</p>
+                            </div>
+                            <p class="text-serif" style="font-size: 0.75rem; font-style: italic; margin-bottom: 0.2rem;">Y padrinos:</p>
+                            <div style="font-size: 0.8rem; font-weight: 600; line-height: 1.2;">
+                                <p>Luz Nateros & Jesús Guzmán</p>
+                            </div>
+                            <div class="page-nav" style="margin-top: auto;">
+                                <button class="btn-nav">Atrás</button>
+                                <button class="btn-nav">Siguiente</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HOJA 4: RECEPCIÓN Y CUENTA REGRESIVA -->
+                <div class="ds-page-frame">
+                    <h4>Página 4: Recepción</h4>
+                    <div class="ds-page-container">
+                        <div class="page-content parchment-bg ornate-box" style="padding: 1.5rem 1rem;">
+                            <h3 class="text-serif-dec" style="font-size: 1.15rem; color: var(--color-rose-dark); margin-bottom: 0.2rem;">La Recepción</h3>
+                            <p class="text-serif" style="font-size: 1rem; font-weight: 600; color: var(--color-gold-dark);">6:00 pm</p>
+                            <p class="text-serif" style="font-size: 0.8rem; font-weight: bold; margin-bottom: 0.2rem;">Calle Hawai 297, Sol de la Molina</p>
+                            <p style="font-size: 0.75rem; opacity: 0.85; max-width: 95%; margin-bottom: 0.4rem; line-height: 1.2;">
+                                Te esperamos para compartir una noche inolvidable de gala.
+                            </p>
+                            <button class="btn btn-gold" style="padding: 0.4rem 1rem; font-size: 0.7rem; margin-bottom: 0.4rem;">Cómo llegar</button>
+                            <div class="gold-separator" style="margin: 0.3rem auto;"></div>
+                            
+                            <!-- Countdown Simulado -->
+                            <div class="countdown-container" style="gap: 0.5rem; margin-top: 0.2rem;">
+                                <div class="countdown-box" style="min-width: 45px; padding: 0.3rem 0.1rem; background: rgba(0,0,0,0.03);">
+                                    <span class="countdown-val" style="font-size: 1.1rem; color: var(--color-text-dark);">07</span>
+                                    <span class="countdown-lbl" style="font-size: 0.55rem;">Días</span>
+                                </div>
+                                <div class="countdown-box" style="min-width: 45px; padding: 0.3rem 0.1rem; background: rgba(0,0,0,0.03);">
+                                    <span class="countdown-val" style="font-size: 1.1rem; color: var(--color-text-dark);">14</span>
+                                    <span class="countdown-lbl" style="font-size: 0.55rem;">Horas</span>
+                                </div>
+                                <div class="countdown-box" style="min-width: 45px; padding: 0.3rem 0.1rem; background: rgba(0,0,0,0.03);">
+                                    <span class="countdown-val" style="font-size: 1.1rem; color: var(--color-text-dark);">30</span>
+                                    <span class="countdown-lbl" style="font-size: 0.55rem;">Min.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="page-nav" style="margin-top: auto;">
+                                <button class="btn-nav">Atrás</button>
+                                <button class="btn-nav">Siguiente</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HOJA 5: VESTIMENTA Y REGALOS -->
+                <div class="ds-page-frame">
+                    <h4>Página 5: Detalles</h4>
+                    <div class="ds-page-container">
+                        <div class="page-content parchment-bg ornate-box" style="padding: 1.5rem 1rem;">
+                            <div style="width: 100%;">
+                                <h3 class="text-serif-dec" style="font-size: 1.1rem; color: var(--color-rose-dark); margin-bottom: 0.1rem;">Código de Vestimenta</h3>
+                                <p class="text-serif" style="font-size: 1.1rem; font-weight: 700; color: var(--color-gold-dark); letter-spacing: 0.05em;">Elegante</p>
+                                <p style="font-size: 0.75rem; opacity: 0.9; line-height: 1.3; max-width: 95%; margin: 0.1rem auto 0.4rem;">
+                                    Tu presencia vestirá de gala nuestra noche especial.
+                                </p>
+                            </div>
+                            <div class="gold-separator" style="margin: 0.4rem auto;"></div>
+                            <div style="width: 100%;">
+                                <h3 class="text-serif-dec" style="font-size: 1.1rem; color: var(--color-rose-dark); margin-bottom: 0.1rem;">Mesa de Regalos</h3>
+                                <p class="text-serif" style="font-size: 1rem; font-weight: 600; color: var(--color-gold-dark);">Lluvia de Sobres</p>
+                                <p style="font-size: 0.75rem; opacity: 0.9; line-height: 1.3; max-width: 95%; margin: 0.1rem auto 0.2rem;">
+                                    Tu presencia es nuestro mejor regalo. Si deseas tener un detalle, podrás depositar tu sobre en la urna.
+                                </p>
+                            </div>
+                            <div class="page-nav" style="margin-top: auto;">
+                                <button class="btn-nav">Atrás</button>
+                                <button class="btn-nav">Siguiente</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HOJA 6: CONFIRMACIÓN -->
+                <div class="ds-page-frame">
+                    <h4>Página 6: RSVP</h4>
+                    <div class="ds-page-container">
+                        <div class="page-content parchment-bg ornate-box" style="padding: 1.5rem 1rem;">
+                            <h3 class="text-serif-dec" style="font-size: 1.15rem; color: var(--color-rose-dark); margin-bottom: 0.1rem;">Confirmación</h3>
+                            <p class="text-serif" style="font-size: 0.75rem; font-style: italic; margin-bottom: 0.5rem; color: var(--color-text-dark);">
+                                Por favor confirma tu asistencia
+                            </p>
+                            <form class="rsvp-form" style="width: 100%; pointer-events: none;">
+                                <div class="form-group" style="margin-bottom: 0.5rem;">
+                                    <input type="text" class="form-input" style="font-size: 0.8rem; padding: 0.5rem; background: rgba(0,0,0,0.03); border-color: rgba(170,140,44,0.3);" placeholder="Nombre del Invitado" readonly>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0.5rem;">
+                                    <div class="radio-group" style="justify-content: center; margin-top: 0.1rem; gap: 0.8rem;">
+                                        <label class="radio-label" style="font-size: 0.75rem; color: var(--color-text-dark);">
+                                            <input type="radio" name="attendance-ds" class="radio-input" checked disabled>
+                                            <span class="radio-custom" style="width: 14px; height: 14px; margin-right: 4px; border-color: var(--color-gold-dark);"></span> Sí
+                                        </label>
+                                        <label class="radio-label" style="font-size: 0.75rem; color: var(--color-text-dark);">
+                                            <input type="radio" name="attendance-ds" class="radio-input" disabled>
+                                            <span class="radio-custom" style="width: 14px; height: 14px; margin-right: 4px; border-color: var(--color-gold-dark);"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-rose" style="padding: 0.5rem; font-size: 0.75rem; width: 100%; border-radius: 4px;">Confirmar</button>
+                            </form>
+                            <div class="page-nav" style="margin-top: auto;">
+                                <button class="btn-nav">Atrás</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
