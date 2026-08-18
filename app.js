@@ -174,7 +174,13 @@ document.addEventListener('DOMContentLoaded', () => {
         petal.style.animation = `fall ${duration}s linear forwards`;
         petal.style.animationDelay = `${Math.random() * 2}s`;
 
-        // El fondo ahora es una imagen fotorealista asignada en el CSS.
+        // Seleccionar aleatoriamente entre los dos diseños de pétalos PNG transparentes
+        const petalImages = [
+            'url("assets/petal.png")',
+            'url("assets/petal_white.png")'
+        ];
+        petal.style.backgroundImage = petalImages[Math.floor(Math.random() * petalImages.length)];
+        
         // Opcionalmente podemos voltear algunos pétalos aleatoriamente para mayor variedad
         if (Math.random() > 0.5) {
             petal.style.transform = `scaleX(-1)`;

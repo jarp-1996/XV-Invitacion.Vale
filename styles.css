@@ -80,19 +80,16 @@ body {
     pointer-events: none;
     z-index: 999;
     overflow: hidden;
-    mix-blend-mode: multiply;
 }
 
 .petal {
     position: absolute;
     top: -10%;
-    background-image: url('assets/petal_white.jpg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0.9;
     transform-origin: center center;
-    mix-blend-mode: multiply;
 }
 
 @keyframes fall {
