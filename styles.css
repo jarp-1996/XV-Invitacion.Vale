@@ -418,7 +418,7 @@ body {
     transform-origin: left center;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease, z-index 0s linear 0.4s;
     opacity: 1;
-    pointer-events: auto;
+    pointer-events: none; /* Por defecto: ninguna página recibe eventos */
 }
 
 /* Stacking Order (Z-Index) de las páginas */
@@ -429,11 +429,16 @@ body {
 #page-5 { z-index: 6; }
 #page-6 { z-index: 5; }
 
+/* Solo la página activa (la del tope del stack visible) puede recibir clicks */
+.page.active-page {
+    pointer-events: auto;
+}
+
 /* Transición de giro (Flipping Y + Desvanecimiento en móvil para evitar overflow) */
 .page.flipped {
     transform: rotateY(-140deg) translateX(-40px) scale(0.95);
     opacity: 0;
-    pointer-events: none;
+    pointer-events: none !important;
     z-index: 1 !important;
 }
 
@@ -473,6 +478,10 @@ body {
     white-space: nowrap;
     font-size: 0.75rem;
     padding: 0.8rem 1.8rem;
+}
+
+.cover-trigger-btn:hover {
+    transform: translateX(-50%) translateY(-2px);
 }
 
 /* Páginas de Pergamino Internas */
