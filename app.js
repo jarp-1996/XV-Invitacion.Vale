@@ -30,27 +30,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. CONTROL DE NAVEGACIÓN CENTRALIZADO (BOTONES Y SWIPE) ---
     let currentPage = 1;
     const totalPages = 6;
+    let isAnimating = false; // Bloqueo anti-doble-click durante la animación
 
     function goNext() {
-        if (currentPage === 1) {
-            playAudio();
-            startPetalsEffect();
-            setTimeout(() => {
-                if(audioToggle) audioToggle.style.display = 'flex';
-            }, 800);
-        }
+        if (isAnimating) return;
         if (currentPage < totalPages) {
+            isAnimating = true;
+            if (currentPage === 1) {
+                playAudio();
+                startPetalsEffect();
+                setTimeout(() => {
+                    if(audioToggle) audioToggle.style.display = 'flex';
+                }, 800);
+            }
             const page = document.getElementById(`page-${currentPage}`);
             if (page) page.classList.add('flipped');
             currentPage++;
+            setTimeout(() => { isAnimating = false; }, 700); // Duración de la transición CSS
         }
     }
 
     function goPrev() {
+        if (isAnimating) return;
         if (currentPage > 1) {
+            isAnimating = true;
             currentPage--;
             const page = document.getElementById(`page-${currentPage}`);
             if (page) page.classList.remove('flipped');
+            setTimeout(() => { isAnimating = false; }, 700);
         }
     }
 
