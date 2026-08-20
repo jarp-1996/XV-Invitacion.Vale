@@ -30,7 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. CONTROL DE NAVEGACIÓN CENTRALIZADO (BOTONES Y SWIPE) ---
     let currentPage = 1;
     const totalPages = 6;
-    let isAnimating = false; // Bloqueo anti-doble-click durante la animación
+    let isAnimating = false;
+
+    function setActivePage(pageNum) {
+        // Quitar active-page de todas las páginas
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+        // Marcar solo la página actual como activa
+        const activePage = document.getElementById(`page-${pageNum}`);
+        if (activePage) activePage.classList.add('active-page');
+    }
+
+    // Al inicio, página 1 es la activa
+    setActivePage(1);
 
     function goNext() {
         if (isAnimating) return;
@@ -46,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const page = document.getElementById(`page-${currentPage}`);
             if (page) page.classList.add('flipped');
             currentPage++;
-            setTimeout(() => { isAnimating = false; }, 700); // Duración de la transición CSS
+            setActivePage(currentPage);
+            setTimeout(() => { isAnimating = false; }, 900); // Mayor al tiempo de animación CSS (0.8s)
         }
     }
 
@@ -57,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
             currentPage--;
             const page = document.getElementById(`page-${currentPage}`);
             if (page) page.classList.remove('flipped');
-            setTimeout(() => { isAnimating = false; }, 700);
+            setActivePage(currentPage);
+            setTimeout(() => { isAnimating = false; }, 900);
         }
     }
 
@@ -86,13 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleSwipe() {
-        const threshold = 40; // Distancia mínima en píxeles
-        if (touchStartX - touchEndX > threshold) {
-            goNext(); // Swipe a la izquierda
-        }
-        if (touchEndX - touchStartX > threshold) {
-            goPrev(); // Swipe a la derecha
-        }
+        const threshold = 40;
+        if (touchStartX - touchEndX > threshold) goNext();
+        if (touchEndX - touchStartX > threshold) goPrev();
     }
     // --- 2. CONTROL DE AUDIO (REPRODUCTOR ELEGANTE) ---
     let isMuted = false;

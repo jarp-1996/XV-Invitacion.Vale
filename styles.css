@@ -1049,3 +1049,15 @@ select.form-input option {
         right: 30px;
     }
 }
+
+/* Animación de la cita del prólogo */
+.animated-quote {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.5s ease 0.8s, transform 1.5s ease 0.8s;
+}
+
+.page.active-page .animated-quote {
+    opacity: 1;
+    transform: translateY(0);
+}
