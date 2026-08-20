@@ -1067,12 +1067,12 @@ select.form-input option {
 
 .page.active-page .animated-quote p:nth-child(1) {
     color: var(--color-text-dark); /* Color final */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 15px rgba(255, 255, 255, 1);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
 .page.active-page .animated-quote p:nth-child(2) {
     color: var(--color-gold-dark); /* Color final */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 15px rgba(255, 255, 255, 1);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 8px rgba(0, 0, 0, 0.4);
     animation-delay: 1.4s;
     animation-duration: 1.3s;
 }
@@ -1097,7 +1097,7 @@ select.form-input option {
         color: inherit; /* Hereda de los nth-child */
         opacity: 1;
         transform: scale(1) translateY(0);
-        text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 15px rgba(255, 255, 255, 1);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 8px rgba(0, 0, 0, 0.4);
     }
 }
 
