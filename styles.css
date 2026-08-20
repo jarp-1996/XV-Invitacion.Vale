@@ -1061,7 +1061,7 @@ select.form-input option {
 
 .page.active-page .animated-quote p {
     opacity: 0;
-    animation: blurGlowReveal 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: blurGlowReveal 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     animation-delay: 0.8s;
 }
 
@@ -1071,8 +1071,8 @@ select.form-input option {
 
 .page.active-page .animated-quote p:nth-child(2) {
     color: var(--color-gold-dark); /* Color final */
-    animation-delay: 1.8s;
-    animation-duration: 2s;
+    animation-delay: 1.4s;
+    animation-duration: 1.3s;
 }
 
 @keyframes blurGlowReveal {
