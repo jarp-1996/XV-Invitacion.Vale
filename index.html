@@ -54,7 +54,7 @@
 
                 <!-- PÁGINA 3: EL CUÁNDO Y EL DÓNDE -->
                 <div class="page" id="page-3">
-                    <div class="page-content parchment-bg ornate-box" style="display: flex; flex-direction: column; justify-content: center;">
+                    <div class="page-content parchment-bg ornate-box" style="display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden; padding-bottom: 0;">
                         <h3 class="text-serif-dec" style="font-size: 1.4rem; color: var(--color-rose-dark); margin-bottom: 0.4rem;">Cuándo &amp; Dónde</h3>
                         
                         <p class="text-serif" style="font-size: 1.1rem; font-weight: 600; color: var(--color-gold-dark); margin-bottom: 0.2rem;">Sábado, 7 de Noviembre 2026</p>
@@ -76,19 +76,21 @@
                             </div>
                         </div>
                         
-                        <div style="display: flex; width: 100%; justify-content: space-between; align-items: flex-end; margin-top: 1rem; position: relative; z-index: 10;">
-                            <div style="width: 55%; text-align: center; padding-left: 0.5rem; padding-bottom: 1rem;">
-                                <p class="text-serif" style="font-size: 0.95rem; font-weight: bold; margin-bottom: 0.3rem;">Ubicación del Evento</p>
-                                <p style="font-size: 0.8rem; opacity: 0.85; margin: 0 auto 0.8rem; line-height: 1.3;">
+                        <!-- Sección inferior: texto a la izquierda, oso a la derecha -->
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; z-index: 10;">
+                            <!-- Columna izquierda: texto + botón -->
+                            <div style="width: 58%; padding: 0 0 1rem 1rem; text-align: center;">
+                                <p class="text-serif" style="font-size: 0.9rem; font-weight: bold; margin-bottom: 0.25rem;">Ubicación del Evento</p>
+                                <p style="font-size: 0.75rem; opacity: 0.85; margin: 0 auto 0.7rem; line-height: 1.3;">
                                     Calle Hawai 297, Sol de la Molina
                                 </p>
-                                <a href="https://maps.app.goo.gl/kRPghWoH3Lv5T87EA" target="_blank" rel="noopener" class="btn btn-rose" style="padding: 0.6rem 1rem; font-size: 0.75rem; letter-spacing: 0.05em;">📍 VER EN EL MAPA</a>
+                                <a href="https://maps.app.goo.gl/kRPghWoH3Lv5T87EA" target="_blank" rel="noopener" class="btn btn-rose" style="padding: 0.5rem 0.9rem; font-size: 0.7rem; letter-spacing: 0.04em; position: relative; z-index: 15;">📍 VER EN EL MAPA</a>
                             </div>
-                            <div style="width: 45%;"></div>
+                            <!-- Columna derecha: oso recortado por el borde inferior -->
+                            <div style="width: 42%; overflow: hidden; line-height: 0;">
+                                <img src="assets/oso_principe.png" alt="Oso Príncipe" style="display: block; width: 100%; max-width: 200px; margin-left: auto; object-fit: cover; object-position: top;">
+                            </div>
                         </div>
-                        
-                        <!-- Ilustración pegada al fondo derecho -->
-                        <img src="assets/oso_principe.png" alt="Oso Príncipe" style="position: absolute; bottom: -5px; right: -20px; max-width: 230px; opacity: 1; z-index: 5; pointer-events: none;">
                         
                         <div class="page-nav">
                             <button class="btn-nav btn-prev">&#10094;</button>
