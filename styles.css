@@ -1098,3 +1098,25 @@ select.form-input option {
         text-shadow: 0 0 0px rgba(212, 175, 55, 0);
     }
 }
+
+/* Retrasar aparición de botones en el prólogo hasta que acabe la animación */
+#page-2 .page-nav {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#page-2.active-page .page-nav {
+    animation: fadeInNav 1s ease forwards;
+    animation-delay: 2.7s; /* 0.8s (espera tapa) + 1.9s (duración animaciones de texto) */
+}
+
+@keyframes fadeInNav {
+    0% {
+        opacity: 0;
+        pointer-events: none;
+    }
+    100% {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
