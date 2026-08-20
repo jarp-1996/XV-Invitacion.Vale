@@ -76,23 +76,16 @@
                             </div>
                         </div>
                         
-                        <!-- Sección inferior: texto a la izquierda, oso a la derecha -->
-                        <div style="position: absolute; bottom: 0; left: 0; width: 100%; display: flex; align-items: flex-end; z-index: 10;">
-                            
-                            <!-- Columna izquierda: ubicación, dirección y botón -->
-                            <div style="width: 48%; padding: 0 0 1.5rem 1rem; text-align: left; flex-shrink: 0;">
-                                <p class="text-serif" style="font-size: 0.9rem; font-weight: bold; margin-bottom: 0.2rem;">Ubicación del Evento</p>
-                                <p style="font-size: 0.75rem; opacity: 0.85; line-height: 1.4; margin: 0 0 0.8rem 0;">
-                                    Calle Hawai 297, Sol de la Molina
-                                </p>
-                                <a href="https://maps.app.goo.gl/kRPghWoH3Lv5T87EA" target="_blank" rel="noopener" class="btn btn-rose" style="padding: 0.5rem 1rem; font-size: 0.7rem; letter-spacing: 0.05em; z-index: 20; position: relative;">📍 VER EN EL MAPA</a>
-                            </div>
+                        <!-- Oso grande absolutamente posicionado, pegado abajo-derecha -->
+                        <img src="assets/oso_principe.png" alt="Oso Príncipe" style="position: absolute; bottom: 0; right: 0; width: 55%; max-width: 250px; z-index: 5; pointer-events: none;">
 
-                            <!-- Columna derecha: oso grande recortado por el borde -->
-                            <div style="width: 52%; flex-shrink: 0; line-height: 0;">
-                                <img src="assets/oso_principe.png" alt="Oso Príncipe" style="display: block; width: 100%; max-width: none;">
-                            </div>
-
+                        <!-- Texto ubicación a la izquierda -->
+                        <div style="width: 50%; text-align: left; padding-left: 0.3rem; margin-top: auto; margin-bottom: 1.2rem; position: relative; z-index: 10;">
+                            <p class="text-serif" style="font-size: 0.9rem; font-weight: bold; margin-bottom: 0.2rem;">Ubicación del Evento</p>
+                            <p style="font-size: 0.75rem; opacity: 0.85; line-height: 1.4; margin: 0 0 0.8rem 0;">
+                                Calle Hawai 297, Sol de la Molina
+                            </p>
+                            <a href="https://maps.app.goo.gl/kRPghWoH3Lv5T87EA" target="_blank" rel="noopener" class="btn btn-rose" style="padding: 0.5rem 1rem; font-size: 0.7rem; letter-spacing: 0.05em;">📍 VER EN EL MAPA</a>
                         </div>
 
                         <div class="page-nav">
