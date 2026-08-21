@@ -3,14 +3,14 @@
    ========================================================================== */
 
 // --- PANTALLA DE CARGA (LOADER) ---
-window.addEventListener('load', () => {
+function hideLoader() {
     const loader = document.getElementById('loader-wrapper');
-    if (loader) {
-        setTimeout(() => {
-            loader.classList.add('fade-out');
-        }, 500); // Pequeño retraso para asegurar carga de tipografías pesadas
+    if (loader && !loader.classList.contains('fade-out')) {
+        loader.classList.add('fade-out');
     }
-});
+}
+window.addEventListener('load', () => setTimeout(hideLoader, 300));
+setTimeout(hideLoader, 1500); // Respaldo automático si la carga de fuentes o audio tarda
 
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. CONTROL DE NAVEGACIÓN CENTRALIZADO (BOTONES Y SWIPE) ---
     let currentPage = 1;
-    const totalPages = 6;
+    const totalPages = 7;
     let isAnimating = false;
 
     function setActivePage(pageNum) {
@@ -222,39 +222,130 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateCountdown, 1000);
 
 
-    // --- 5. LÓGICA DE FORMULARIO RSVP ---
+    // --- 5. LÓGICA DE FORMULARIO RSVP CON RATE LIMIT (MÁX. 3 INTENTOS) ---
+    const addCompanionBtn = document.getElementById('add-companion-btn');
+    const companionsContainer = document.getElementById('companions-container');
+    const rsvpLimitMsg = document.getElementById('rsvp-limit');
+    const maxCompanions = 2; // 1 titular + 2 acompañantes = 3 personas máximo
+    const MAX_RSVP_ATTEMPTS = 3;
+
+    function getRsvpAttempts() {
+        try {
+            return parseInt(localStorage.getItem('valeria_rsvp_attempts') || '0', 10);
+        } catch (e) {
+            return 0;
+        }
+    }
+
+    function checkRsvpLimit() {
+        if (getRsvpAttempts() >= MAX_RSVP_ATTEMPTS) {
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.6';
+                submitBtn.style.cursor = 'not-allowed';
+            }
+            if (rsvpLimitMsg) rsvpLimitMsg.style.display = 'block';
+            return true;
+        }
+        return false;
+    }
+
+    checkRsvpLimit();
+
+    if (addCompanionBtn && companionsContainer) {
+        addCompanionBtn.addEventListener('click', () => {
+            const currentCompanions = companionsContainer.querySelectorAll('.companion-row').length;
+            if (currentCompanions < maxCompanions) {
+                const companionIndex = currentCompanions + 1;
+                const row = document.createElement('div');
+                row.className = 'companion-row';
+                row.style.cssText = 'display: flex; gap: 0.35rem; margin-top: 0.4rem; align-items: center;';
+                
+                row.innerHTML = `
+                    <input type="text" class="form-input companion-input" style="width: 100%;" placeholder="Nombre de acompañante ${companionIndex}" required>
+                    <button type="button" class="btn-remove-companion" style="background: none; border: none; color: #b71c1c; font-size: 1.2rem; cursor: pointer; padding: 0 0.35rem; line-height: 1; font-weight: bold;" title="Eliminar">✕</button>
+                `;
+
+                // Botón para eliminar este acompañante
+                row.querySelector('.btn-remove-companion').addEventListener('click', () => {
+                    row.remove();
+                    updateCompanionButton();
+                });
+
+                companionsContainer.appendChild(row);
+                updateCompanionButton();
+            }
+        });
+
+        function updateCompanionButton() {
+            const count = companionsContainer.querySelectorAll('.companion-row').length;
+            if (count >= maxCompanions) {
+                addCompanionBtn.style.display = 'none';
+            } else {
+                addCompanionBtn.style.display = 'inline';
+            }
+        }
+    }
+
     if (rsvpForm) {
         rsvpForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
+            if (checkRsvpLimit()) return;
+
             submitBtn.disabled = true;
             submitBtn.innerText = 'Enviando...';
-            rsvpSuccess.style.display = 'none';
-            rsvpError.style.display = 'none';
+            if (rsvpSuccess) rsvpSuccess.style.display = 'none';
+            if (rsvpError) rsvpError.style.display = 'none';
+            if (rsvpLimitMsg) rsvpLimitMsg.style.display = 'none';
 
-            const guestName = document.getElementById('guest-name').value;
-            const attendanceValue = document.querySelector('input[name="attendance"]:checked').value;
+            const guestName = document.getElementById('guest-name').value.trim();
+            const companionInputs = document.querySelectorAll('.companion-input');
+            const companionNames = Array.from(companionInputs).map(inp => inp.value.trim()).filter(Boolean);
 
-            const rsvpData = {
-                name: guestName,
-                attendance: attendanceValue === 'si' ? 'Sí' : 'No'
-            };
+            let formattedName = guestName;
+            if (companionNames.length > 0) {
+                formattedName += ` (Acompañantes: ${companionNames.join(', ')})`;
+            }
+
+            // Incrementar contador de intentos (Rate limit)
+            try {
+                const newAttempts = getRsvpAttempts() + 1;
+                localStorage.setItem('valeria_rsvp_attempts', newAttempts.toString());
+            } catch(e) {}
 
             // Simulación si no está configurada la URL
             if (!GOOGLE_SCRIPT_URL) {
                 setTimeout(() => {
                     submitBtn.disabled = false;
                     submitBtn.innerText = 'Confirmar Asistencia';
-                    rsvpSuccess.style.display = 'block';
+                    if (rsvpSuccess) rsvpSuccess.style.display = 'block';
                     rsvpForm.reset();
+                    if (companionsContainer) {
+                        companionsContainer.innerHTML = '';
+                        if (addCompanionBtn) addCompanionBtn.style.display = 'inline';
+                    }
+                    checkRsvpLimit();
                 }, 1200);
                 return;
             }
 
             const params = new URLSearchParams();
-            for (const key in rsvpData) {
-                params.append(key, rsvpData[key]);
-            }
+            // Campos principales que registra Google Apps Script en la hoja
+            params.append('nombre', formattedName);
+            params.append('asistencia', 'Sí');
+            // Campos adicionales por compatibilidad con múltiples formatos de Apps Script
+            params.append('name', formattedName);
+            params.append('titular', guestName);
+            params.append('companion', companionNames.join(', '));
+            params.append('companions', companionNames.join(', '));
+            params.append('acompaniante', companionNames.join(', '));
+            params.append('acompaniantes', companionNames.join(', '));
+            companionNames.forEach((comp, idx) => {
+                params.append(`acompaniante_${idx + 1}`, comp);
+                params.append(`companion_${idx + 1}`, comp);
+            });
+            params.append('attendance', 'Sí');
 
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
@@ -267,15 +358,35 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(() => {
                 submitBtn.disabled = false;
                 submitBtn.innerText = 'Confirmar Asistencia';
-                rsvpSuccess.style.display = 'block';
+                if (rsvpSuccess) rsvpSuccess.style.display = 'block';
                 rsvpForm.reset();
+                if (companionsContainer) {
+                    companionsContainer.innerHTML = '';
+                    if (addCompanionBtn) addCompanionBtn.style.display = 'inline';
+                }
+                checkRsvpLimit();
             })
             .catch(err => {
                 console.error("Error:", err);
                 submitBtn.disabled = false;
                 submitBtn.innerText = 'Confirmar Asistencia';
-                rsvpError.style.display = 'block';
+                if (rsvpError) rsvpError.style.display = 'block';
             });
+        });
+    }
+
+    // --- 6. CERRAR INVITACIÓN (VENTANA O PESTAÑA) ---
+    const btnCloseBook = document.getElementById('btn-close-book');
+    if (btnCloseBook) {
+        btnCloseBook.addEventListener('click', () => {
+            // Intentar cerrar la ventana/pestaña
+            window.close();
+            setTimeout(() => {
+                try {
+                    window.open('', '_self', '');
+                    window.close();
+                } catch(e) {}
+            }, 100);
         });
     }
 });

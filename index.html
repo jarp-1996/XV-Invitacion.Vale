@@ -25,7 +25,7 @@
                 
                 <!-- PÁGINA 1: PORTADA -->
                 <div class="page page-cover" id="page-1">
-                    <div class="page-content-front" style="background-image: url('assets/book_cover2.jpg');">
+                    <div class="page-content-front" style="background-image: url('assets/book_cover3.jpg');">
                         <!-- El botón abre el libro -->
                         <button class="btn btn-gold cover-trigger-btn" id="btn-open">Abrir Invitación</button>
                     </div>
@@ -57,29 +57,36 @@
                 <!-- PÁGINA 3: EL CUÁNDO Y EL DÓNDE -->
                 <div class="page" id="page-3">
                     <div class="page-content parchment-bg ornate-box" style="display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden; padding-bottom: 0;">
-                        <h3 class="text-serif-dec" style="font-size: 1.4rem; color: var(--color-rose-dark); margin-bottom: 0.4rem;">¿Cuándo &amp; Dónde?</h3>
+                        <!-- Paso 1: Pregunta -->
+                        <h3 class="text-serif-dec anim-p3-title" style="font-size: 1.4rem; color: var(--color-rose-dark); margin-bottom: 0.4rem;">¿Cuándo &amp; Dónde?</h3>
                         
-                        <p class="text-serif" style="font-size: 1.1rem; font-weight: 600; color: var(--color-gold-dark); margin-bottom: 0.2rem;">Sábado, 7 de Noviembre 2026</p>
-                        <p class="text-serif text-contrast-shadow" style="font-size: 1rem; margin-bottom: 1rem;">🕕 6:00 PM</p>
+                        <!-- Paso 2: Fecha y Hora -->
+                        <div class="anim-p3-datetime">
+                            <p class="text-serif" style="font-size: 1.1rem; font-weight: 600; color: var(--color-gold-dark); margin-bottom: 0.2rem;">Sábado, 7 de Noviembre 2026</p>
+                            <p class="text-serif text-contrast-shadow" style="font-size: 1rem; margin-bottom: 0.4rem;">🕕 6:00 PM</p>
+                        </div>
                         
-                        <p class="text-serif" style="font-size: 0.85rem; font-style: italic; color: var(--color-gold-dark); margin-bottom: 0.4rem;">Faltan...</p>
-                        <div class="countdown-container" id="countdown" style="margin-bottom: 3rem;">
-                            <div class="countdown-box">
-                                <span class="countdown-val" id="days">00</span><span class="countdown-lbl">Días</span>
-                            </div>
-                            <div class="countdown-box">
-                                <span class="countdown-val" id="hours">00</span><span class="countdown-lbl">Hrs</span>
-                            </div>
-                            <div class="countdown-box">
-                                <span class="countdown-val" id="minutes">00</span><span class="countdown-lbl">Min</span>
-                            </div>
-                            <div class="countdown-box">
-                                <span class="countdown-val" id="seconds">00</span><span class="countdown-lbl">Seg</span>
+                        <!-- Paso 3: Cuenta Regresiva (Acto 2: Escala suave + resplandor) -->
+                        <div class="anim-p3-countdown">
+                            <p class="text-serif" style="font-size: 0.85rem; font-style: italic; color: var(--color-gold-dark); margin-bottom: 0.25rem;">Faltan...</p>
+                            <div class="countdown-container" id="countdown" style="margin-bottom: 3.5rem;">
+                                <div class="countdown-box">
+                                    <span class="countdown-val" id="days">00</span><span class="countdown-lbl">Días</span>
+                                </div>
+                                <div class="countdown-box">
+                                    <span class="countdown-val" id="hours">00</span><span class="countdown-lbl">Hrs</span>
+                                </div>
+                                <div class="countdown-box">
+                                    <span class="countdown-val" id="minutes">00</span><span class="countdown-lbl">Min</span>
+                                </div>
+                                <div class="countdown-box">
+                                    <span class="countdown-val" id="seconds">00</span><span class="countdown-lbl">Seg</span>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Sección inferior: dos columnas. Mayordomo izquierda, info derecha -->
-                        <div style="position: absolute; bottom: 3.8rem; left: 0; width: 100%; display: flex; align-items: flex-end; z-index: 10;">
+                        <!-- Paso 4: Sección inferior: Mayordomo izquierda, info derecha -->
+                        <div class="anim-p3-bottom" style="position: absolute; bottom: 3.8rem; left: 0; width: 100%; display: flex; align-items: flex-end; z-index: 10;">
                             <!-- Columna izquierda: Mayordomo (120% escala) con sombreado drop-shadow -->
                             <div style="width: 40%; flex-shrink: 0; line-height: 0; padding-left: 0.8rem;">
                                 <img src="assets/tiempo_mayordomo.png" alt="Mayordomo del Tiempo" style="display: block; width: 100%; height: auto; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));">
@@ -90,7 +97,7 @@
                                 <p style="font-size: 0.86rem; opacity: 0.95; line-height: 1.4; margin: 0 0 0.8rem 0;">
                                     Calle Hawai 297,<br>Sol de la Molina
                                 </p>
-                                <a href="https://maps.app.goo.gl/kRPghWoH3Lv5T87EA" target="_blank" rel="noopener" class="btn btn-rose" style="padding: 0.55rem 0.85rem; font-size: 0.78rem; letter-spacing: 0.04em; white-space: nowrap;">📍 VER EN EL MAPA</a>
+                                <a href="https://maps.app.goo.gl/kRPghWoH3Lv5T87EA" target="_blank" rel="noopener" class="btn btn-gold" style="padding: 0.55rem 0.85rem; font-size: 0.78rem; letter-spacing: 0.04em; white-space: nowrap;">📍 VER EN EL MAPA</a>
                             </div>
                         </div>
 
@@ -105,29 +112,36 @@
 
                 <!-- PÁGINA 4: DETALLES DEL EVENTO (DRESS CODE Y REGALOS) -->
                 <div class="page" id="page-4">
-                    <div class="page-content parchment-bg ornate-box">
-                        <div style="margin-top: 0.5rem; width: 100%;">
-                            <h3 class="text-serif-dec" style="font-size: 1.3rem; color: var(--color-rose-dark); margin-bottom: 0.2rem;">Dress Code</h3>
-                            <p class="text-serif" style="font-size: 1.1rem; font-weight: 700; color: var(--color-gold-dark); letter-spacing: 0.1em;">Elegante / Formal</p>
-                            <div style="display: flex; justify-content: center; gap: 0.5rem; margin: 0.6rem 0;">
-                                <div style="width: 22px; height: 22px; border-radius: 50%; background: #000; border: 1px solid var(--color-gold);" title="Negro"></div>
-                                <div style="width: 22px; height: 22px; border-radius: 50%; background: #1a2942; border: 1px solid var(--color-gold);" title="Azul Noche"></div>
-                                <div style="width: 22px; height: 22px; border-radius: 50%; background: #5a1818; border: 1px solid var(--color-gold);" title="Vino"></div>
+                    <div class="page-content parchment-bg ornate-box" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2.2rem 1.5rem;">
+                        <!-- Paso 1: Título Dress Code -->
+                        <div class="anim-p4-step1" style="width: 100%; text-align: center;">
+                            <h3 class="text-serif-dec" style="font-size: 1.4rem; color: var(--color-rose-dark); margin-bottom: 0.25rem;">Dress Code</h3>
+                            <p class="text-serif" style="font-size: 1.2rem; font-weight: 700; color: var(--color-gold-dark); letter-spacing: 0.12em; margin-bottom: 0.6rem;">Elegante</p>
+                        </div>
+                        
+                        <!-- Paso 2: Círculos de colores reservados -->
+                        <div class="anim-p4-step2" style="width: 100%; text-align: center;">
+                            <div style="display: flex; justify-content: center; gap: 1rem; margin: 0.5rem 0;">
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: #fdd835; border: 1.5px solid var(--color-gold-dark); box-shadow: 0 3px 8px rgba(0,0,0,0.22);" title="Amarillo"></div>
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%); border: 1.5px solid var(--color-gold-dark); box-shadow: 0 3px 8px rgba(0,0,0,0.22);" title="Dorado"></div>
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: #b71c1c; border: 1.5px solid var(--color-gold); box-shadow: 0 3px 8px rgba(0,0,0,0.22);" title="Rojo"></div>
                             </div>
-                            <p style="font-size: 0.72rem; opacity: 0.9; line-height: 1.3; max-width: 90%; margin: 0 auto;">
-                                *Color reservado: Amarillo/Dorado
+                            <p class="text-serif" style="font-size: 0.88rem; font-style: italic; opacity: 0.92; line-height: 1.4; max-width: 90%; margin: 0.5rem auto 0;">
+                                Colores reservados (no usar)
                             </p>
                         </div>
                         
-                        <div class="gold-separator" style="margin: 0.8rem auto;"></div>
+                        <!-- Paso 3: Separador y Título Mesa de Regalos (más abajo) -->
+                        <div class="anim-p4-step3" style="width: 100%; text-align: center;">
+                            <div class="gold-separator" style="margin: 2.2rem auto 1.4rem;"></div>
+                            <h3 class="text-serif-dec" style="font-size: 1.4rem; color: var(--color-rose-dark); margin-bottom: 0.8rem;">Mesa de Regalos</h3>
+                        </div>
                         
-                        <div style="width: 100%;">
-                            <h3 class="text-serif-dec" style="font-size: 1.3rem; color: var(--color-rose-dark); margin-bottom: 0.2rem;">Mesa de Regalos</h3>
-                            <p class="text-serif" style="font-size: 1rem; font-weight: 600; color: var(--color-gold-dark);">Lluvia de Sobres</p>
-                            <p style="font-size: 0.78rem; opacity: 0.9; line-height: 1.3; max-width: 90%; margin: 0.3rem auto 0.6rem;">
-                                Tu presencia es mi mejor regalo. Si deseas tener un detalle, habrá un buzón en la recepción o puedes hacerlo aquí:
+                        <!-- Paso 4: Frase de obsequios -->
+                        <div class="anim-p4-step4" style="width: 100%; text-align: center;">
+                            <p class="text-serif text-story" style="font-size: 1.25rem; font-style: italic; opacity: 0.95; line-height: 1.6; max-width: 92%; margin: 0 auto;">
+                                "Tu presencia es mi mejor regalo. Si deseas tener un detalle, habrá un espacio para dejar tus obsequios:"
                             </p>
-                            <button class="btn btn-rose" style="padding: 0.4rem 1rem; font-size: 0.7rem;" onclick="alert('Aquí puedes enlazar tu cuenta bancaria o QR.')">Ver Datos Bancarios</button>
                         </div>
                         
                         <div class="page-footer">— 3 —</div>
@@ -141,45 +155,41 @@
 
                 <!-- PÁGINA 5: RSVP -->
                 <div class="page" id="page-5">
-                    <div class="page-content parchment-bg ornate-box">
-                        <h3 class="text-serif-dec" style="font-size: 1.3rem; color: var(--color-rose-dark); margin-bottom: 0.2rem;">Confirmación</h3>
-                        <p class="text-serif" style="font-size: 0.8rem; font-style: italic; margin-bottom: 0.6rem; ">
-                            Por favor confirma tu asistencia
-                        </p>
+                    <div class="page-content parchment-bg ornate-box" style="display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 1.6rem 1.8rem 0; overflow: hidden; position: relative;">
+                        <!-- Paso 1: Título -->
+                        <h3 class="text-serif-dec anim-p5-title" style="font-size: 1.35rem; color: var(--color-rose-dark); margin-bottom: 0.7rem; text-align: center;">Confirmación de asistencia</h3>
                         
-                        <form id="rsvp-form" class="rsvp-form" style="width: 100%; text-align: left;">
-                            <div class="form-group" style="margin-bottom: 0.5rem;">
-                                <label style="font-size: 0.7rem; font-weight: bold; ">Tu Nombre</label>
-                                <input type="text" id="guest-name" class="form-input" style="padding: 0.4rem; font-size: 0.8rem; background: rgba(0,0,0,0.03); border-color: rgba(170,140,44,0.4); " required>
-                            </div>
-                            
-                            <div class="form-group" style="margin-bottom: 0.5rem; display: none;" id="companion-field">
-                                <label style="font-size: 0.7rem; font-weight: bold; ">Acompañante(s)</label>
-                                <input type="text" id="companion-name" class="form-input" style="padding: 0.4rem; font-size: 0.8rem; background: rgba(0,0,0,0.03); border-color: rgba(170,140,44,0.4); " placeholder="Nombre(s)">
-                            </div>
-                            <div style="text-align: right; margin-bottom: 0.4rem;">
-                                <span id="add-companion-btn" style="font-size: 0.7rem; color: var(--color-rose-dark); cursor: pointer; text-decoration: underline; font-weight: 600;">+ Añadir acompañante</span>
-                            </div>
-                            
-                            <div class="form-group" style="margin-bottom: 0.5rem;">
-                                <label style="font-size: 0.7rem; font-weight: bold; ">Dieta / Alergias (Opcional)</label>
-                                <input type="text" id="diet-req" class="form-input" style="padding: 0.4rem; font-size: 0.8rem; background: rgba(0,0,0,0.03); border-color: rgba(170,140,44,0.4); " placeholder="Ej. Ninguna, Vegano">
-                            </div>
-                            
-                            <div class="form-group" style="margin-bottom: 0.6rem; text-align: center;">
-                                <label style="font-size: 0.75rem; font-weight: bold; margin-bottom: 0.2rem; display: block; ">¿Asistirás?</label>
-                                <div class="radio-group" style="justify-content: center;">
-                                    <label class="radio-label" style="font-size: 0.75rem; "><input type="radio" name="attendance" value="si" required checked><span class="radio-custom" style="border-color: var(--color-gold-dark);"></span> Sí</label>
-                                    <label class="radio-label" style="font-size: 0.75rem; "><input type="radio" name="attendance" value="no" required><span class="radio-custom" style="border-color: var(--color-gold-dark);"></span> No</label>
+                        <form id="rsvp-form" class="rsvp-form" style="width: 100%; text-align: left; z-index: 10; position: relative;">
+                            <!-- Paso 2: Campo Nombre y Acompañantes -->
+                            <div class="anim-p5-form">
+                                <div class="form-group" style="margin-bottom: 0.35rem;">
+                                    <label style="font-size: 0.88rem; font-weight: bold; color: #1a1006; margin-bottom: 0.2rem; display: block;">Nombre Completo</label>
+                                    <input type="text" id="guest-name" name="guest_name" class="form-input" style="width: 100%;" placeholder="Ingresa tu nombre y apellido" required>
+                                </div>
+                                
+                                <!-- Contenedor dinámico para acompañantes (máx. 2 acompañantes, 3 personas en total) -->
+                                <div id="companions-container"></div>
+
+                                <div style="text-align: right; margin: 0.3rem 0 0.6rem;">
+                                    <span id="add-companion-btn" style="font-size: 0.82rem; color: var(--color-rose-dark); cursor: pointer; text-decoration: underline; font-weight: 700; user-select: none;">+ Añadir acompañante</span>
                                 </div>
                             </div>
                             
-                            <button type="submit" class="btn btn-rose" id="submit-btn" style="padding: 0.5rem; font-size: 0.8rem; width: 100%; border-radius: 4px;">Enviar RSVP</button>
+                            <!-- Paso 3: Botón Confirmar Asistencia -->
+                            <div class="anim-p5-btn" style="margin-bottom: 0.5rem;">
+                                <button type="submit" class="btn btn-gold" id="submit-btn" style="padding: 0.65rem; font-size: 0.88rem; width: 100%; border-radius: 4px; letter-spacing: 0.08em;">Confirmar Asistencia</button>
+                            </div>
                             
-                            <div id="rsvp-success" class="form-message success" style="display:none; font-size: 0.7rem; padding: 0.4rem;">¡Gracias por confirmar!</div>
-                            <div id="rsvp-error" class="form-message error" style="display:none; font-size: 0.7rem; padding: 0.4rem;">Error al enviar.</div>
+                            <div id="rsvp-success" class="form-message success" style="display:none; font-size: 0.75rem; padding: 0.5rem; margin-top: 0.3rem; text-align: center;">¡Gracias por confirmar tu asistencia!</div>
+                            <div id="rsvp-error" class="form-message error" style="display:none; font-size: 0.75rem; padding: 0.5rem; margin-top: 0.3rem; text-align: center;">Hubo un error al enviar. Intenta nuevamente.</div>
+                            <div id="rsvp-limit" class="form-message error" style="display:none; font-size: 0.75rem; padding: 0.5rem; margin-top: 0.3rem; text-align: center; color: #b71c1c; font-weight: bold; background: rgba(183, 28, 28, 0.1); border: 1px solid #b71c1c; border-radius: 4px;">Has alcanzado el límite máximo de confirmaciones permitidas (3).</div>
                         </form>
                         
+                        <!-- Paso 4: Ilustración del Oso Príncipe pegado a la base inferior -->
+                        <div class="anim-p5-bear" style="position: absolute; bottom: 0; left: 0; width: 100%; display: flex; justify-content: center; line-height: 0; pointer-events: none; z-index: 5;">
+                            <img src="assets/oso_principe.png" alt="Oso Príncipe" style="display: block; max-height: 120px; width: auto; filter: drop-shadow(0 -2px 10px rgba(0,0,0,0.18));">
+                        </div>
+
                         <div class="page-footer">— 4 —</div>
 
                         <div class="page-nav">
@@ -189,26 +199,34 @@
                     </div>
                 </div>
 
-                <!-- PÁGINA 6: CONTRATAPA -->
+                <!-- PÁGINA 6: AGRADECIMIENTO (PÁG 5 INTERIOR) -->
                 <div class="page" id="page-6">
-                    <div class="page-content parchment-bg ornate-box" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <div class="page-content parchment-bg ornate-box" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2.5rem 1.8rem;">
                         <h2 class="text-cursive" style="font-size: 3.5rem; color: var(--color-gold-dark); margin-bottom: 0.5rem;">Gracias</h2>
-                        <p class="text-serif text-story" style="font-size: 1.2rem; font-style: italic; max-width: 80%; text-align: center; ">
+                        <p class="text-serif text-story" style="font-size: 1.25rem; font-style: italic; max-width: 85%; text-align: center; line-height: 1.6;">
                             ¡No faltes!<br>Nos vemos en la pista de baile.
                         </p>
-                        <div class="gold-separator" style="margin: 1.5rem auto;"></div>
-                        <button class="btn btn-gold" id="btn-close-book" style="margin-top: 1rem;">Cerrar Invitación</button>
+                        <div class="gold-separator" style="margin: 1.4rem auto 1.2rem;"></div>
+                        
+                        <button class="btn btn-gold" id="btn-close-book" style="animation: goldPulse 2.5s infinite; font-size: 0.85rem; padding: 0.75rem 2rem; border-radius: 4px; letter-spacing: 0.08em; z-index: 5; margin-top: 0.5rem;">Cerrar Invitación</button>
                         
                         <div class="page-footer">— 5 —</div>
 
                         <div class="page-nav">
                             <button class="btn-nav btn-prev">&#10094;</button>
+                            <button class="btn-nav btn-next">&#10095;</button>
                         </div>
-             
-            </div>
-        </div>
-    </div>           </div>
+                    </div>
+                </div>
 
+                <!-- PÁGINA 7: CONTRAPORTADA -->
+                <div class="page page-cover" id="page-7">
+                    <div class="page-content-back" style="background-image: url('assets/book_backcover.jpg');">
+                        <div class="page-nav" style="z-index: 10;">
+                            <button class="btn-nav btn-prev">&#10094;</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
